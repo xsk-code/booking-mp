@@ -1,0 +1,98 @@
+/* pages/resource-detail/resource-detail.wxss */
+
+/* 资源详情 */
+.resource-detail {
+  margin-bottom: 120rpx;
+}
+
+.resource-header {
+  position: relative;
+  height: 400rpx;
+  overflow: hidden;
+}
+
+.resource-cover {
+  width: 100%;
+  height: 100%;
+}
+
+.resource-info {
+  background-color: #ffffff;
+  padding: 24rpx;
+}
+
+.resource-name {
+  font-size: 36rpx;
+  font-weight: bold;
+  color: #333333;
+  margin-bottom: 16rpx;
+}
+
+.resource-tags {
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 20rpx;
+}
+
+.type-tag,
+.capacity-tag,
+.price-tag {
+  display: inline-block;
+  padding: 8rpx 16rpx;
+  margin-right: 12rpx;
+  font-size: 24rpx;
+  border-radius: 4rpx;
+}
+
+.type-tag {
+  background-color: #e6f7ff;
+  color: #1890ff;
+}
+
+.capacity-tag {
+  background-color: #f6ffed;
+  color: #52c41a;
+}
+
+.price-tag {
+  background-color: #fff2e8;
+  color: #fa8c16;
+}
+
+.resource-description {
+  font-size: 28rpx;
+  color: #666666;
+  line-height: 1.8;
+}
+
+/* 预约按钮 */
+.booking-action {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 20rpx;
+  background-color: #ffffff;
+  box-shadow: 0 -4rpx 12rpx rgba(0, 0, 0, 0.05);
+}
+
+.booking-btn {
+  background-color: #1989fa;
+  color: #ffffff;
+  text-align: center;
+  padding: 24rpx;
+  border-radius: 8rpx;
+  font-size: 32rpx;
+  font-weight: bold;
+}
+
+/* 加载中 */
+.loading-container {
+  padding: 100rpx 0;
+  text-align: center;
+}
+
+.loading-text {
+  font-size: 28rpx;
+  color: #999999;
+}

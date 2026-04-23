@@ -1,0 +1,81 @@
+/* pages/admin/stats/stats.wxss */
+.container {
+  padding: 20rpx;
+}
+
+.stats-overview {
+  display: flex;
+  margin-bottom: 20rpx;
+}
+
+.overview-card {
+  flex: 1;
+  background-color: #ffffff;
+  border-radius: 16rpx;
+  padding: 24rpx;
+  text-align: center;
+  margin-right: 20rpx;
+}
+
+.overview-card:last-child {
+  margin-right: 0;
+}
+
+.stat-value {
+  font-size: 40rpx;
+  font-weight: bold;
+  color: #1989fa;
+  margin-bottom: 8rpx;
+}
+
+.stat-label {
+  font-size: 24rpx;
+  color: #999999;
+}
+
+.chart-section {
+  background-color: #ffffff;
+  border-radius: 16rpx;
+  padding: 24rpx;
+  margin-bottom: 20rpx;
+}
+
+.section-title {
+  font-size: 30rpx;
+  font-weight: bold;
+  color: #333333;
+  margin-bottom: 20rpx;
+}
+
+.chart-placeholder {
+  padding: 80rpx 0;
+  text-align: center;
+  color: #999999;
+  font-size: 28rpx;
+}
+
+.resource-list {
+  
+}
+
+.resource-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 20rpx 0;
+  border-bottom: 2rpx solid #f0f0f0;
+}
+
+.resource-item:last-child {
+  border-bottom: none;
+}
+
+.resource-name {
+  font-size: 28rpx;
+  color: #333333;
+}
+
+.resource-count {
+  font-size: 28rpx;
+  color: #1989fa;
+  font-weight: bold;
+}

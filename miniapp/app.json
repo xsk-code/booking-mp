@@ -1,0 +1,52 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/venue-detail/venue-detail",
+    "pages/resource-detail/resource-detail",
+    "pages/booking/booking",
+    "pages/booking-result/booking-result",
+    "pages/my-bookings/my-bookings",
+    "pages/booking-detail/booking-detail",
+    "pages/profile/profile",
+    "pages/admin/dashboard/dashboard",
+    "pages/admin/pending-bookings/pending-bookings",
+    "pages/admin/booking-calendar/booking-calendar",
+    "pages/admin/resource-manage/resource-manage",
+    "pages/admin/venue-settings/venue-settings",
+    "pages/admin/stats/stats"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#1989fa",
+    "navigationBarTitleText": "预约小程序",
+    "navigationBarTextStyle": "white"
+  },
+  "tabBar": {
+    "color": "#999999",
+    "selectedColor": "#1989fa",
+    "backgroundColor": "#ffffff",
+    "borderStyle": "black",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "首页",
+        "iconPath": "assets/icons/home.png",
+        "selectedIconPath": "assets/icons/home-active.png"
+      },
+      {
+        "pagePath": "pages/my-bookings/my-bookings",
+        "text": "我的预约",
+        "iconPath": "assets/icons/booking.png",
+        "selectedIconPath": "assets/icons/booking-active.png"
+      },
+      {
+        "pagePath": "pages/profile/profile",
+        "text": "个人中心",
+        "iconPath": "assets/icons/profile.png",
+        "selectedIconPath": "assets/icons/profile-active.png"
+      }
+    ]
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json"
+}
