@@ -1,0 +1,67 @@
+<!--pages/venue-detail/venue-detail.wxml-->
+<view class="container">
+  <!-- 场地详情 -->
+  <view class="venue-detail" wx:if="{{venue}}">
+    <view class="venue-header">
+      <image src="{{venue.cover_image_url || '/assets/images/default-venue.png'}}" class="venue-cover" mode="aspectFill" />
+      <view class="venue-info-overlay">
+        <view class="venue-name">{{venue.name}}</view>
+        <view class="venue-address">
+          <text class="icon">📍</text>
+          <text>{{venue.address || '暂无地址'}}</text>
+        </view>
+      </view>
+    </view>
+
+    <view class="venue-details">
+      <view class="detail-item">
+        <text class="detail-label">营业时间</text>
+        <text class="detail-value">{{venue.business_start}} - {{venue.business_end}}</text>
+      </view>
+      <view class="detail-item" wx:if="{{venue.contact_phone}}">
+        <text class="detail-label">联系电话</text>
+        <text class="detail-value phone" bindtap="callPhone">{{venue.contact_phone}}</text>
+      </view>
+      <view class="detail-item" wx:if="{{venue.description}}">
+        <text class="detail-label">场地介绍</text>
+        <text class="detail-value">{{venue.description}}</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 资源列表 -->
+  <view class="resources-section">
+    <view class="section-title">可预约资源</view>
+    
+    <view class="resource-list" wx:if="{{resourceList.length > 0}}">
+      <view class="resource-card" wx:for="{{resourceList}}" wx:key="id" bindtap="goToResourceDetail" data-id="{{item.id}}">
+        <view class="resource-image">
+          <image src="{{item.cover_image_url || '/assets/images/default-resource.png'}}" class="resource-img" mode="aspectFill" />
+        </view>
+        <view class="resource-info">
+          <view class="resource-name">{{item.name}}</view>
+          <view class="resource-type">
+            <text class="type-tag">{{item.type === 'room' ? '包间' : item.type === 'table' ? '桌位' : '设备'}}</text>
+          </view>
+          <view class="resource-capacity" wx:if="{{item.capacity}}">
+            容纳人数：{{item.capacity}}人
+          </view>
+          <view class="resource-price" wx:if="{{item.price}}">
+            单价：¥{{item.price}}/小时
+          </view>
+        </view>
+        <view class="resource-arrow">›</view>
+      </view>
+    </view>
+
+    <!-- 空状态 -->
+    <view class="empty-state" wx:if="{{!loading && resourceList.length === 0}}">
+      <text class="empty-text">该场地暂无可用资源</text>
+    </view>
+  </view>
+
+  <!-- 加载中 -->
+  <view class="loading-container" wx:if="{{loading}}">
+    <view class="loading-text">加载中...</view>
+  </view>
+</view>

@@ -1,0 +1,33 @@
+<!--pages/resource-detail/resource-detail.wxml-->
+<view class="container">
+  <!-- 资源详情 -->
+  <view class="resource-detail" wx:if="{{resource}}">
+    <view class="resource-header">
+      <image src="{{resource.cover_image_url || '/assets/images/default-resource.png'}}" class="resource-cover" mode="aspectFill" />
+    </view>
+
+    <view class="resource-info">
+      <view class="resource-name">{{resource.name}}</view>
+      <view class="resource-tags">
+        <text class="type-tag">{{resource.type === 'room' ? '包间' : resource.type === 'table' ? '桌位' : '设备'}}</text>
+        <text class="capacity-tag" wx:if="{{resource.capacity}}">容纳{{resource.capacity}}人</text>
+        <text class="price-tag" wx:if="{{resource.price}}">¥{{resource.price}}/小时</text>
+      </view>
+      <view class="resource-description" wx:if="{{resource.description}}">
+        {{resource.description}}
+      </view>
+    </view>
+  </view>
+
+  <!-- 预约按钮 -->
+  <view class="booking-action">
+    <view class="booking-btn" bindtap="goToBooking">
+      立即预约
+    </view>
+  </view>
+
+  <!-- 加载中 -->
+  <view class="loading-container" wx:if="{{loading}}">
+    <view class="loading-text">加载中...</view>
+  </view>
+</view>

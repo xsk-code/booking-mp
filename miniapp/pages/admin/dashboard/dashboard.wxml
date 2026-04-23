@@ -1,0 +1,101 @@
+<!--pages/admin/dashboard/dashboard.wxml-->
+<view class="container">
+  <!-- 统计概览 -->
+  <view class="stats-section">
+    <view class="stats-row">
+      <view class="stat-item" bindtap="goToPendingBookings">
+        <view class="stat-value">{{stats.pendingCount}}</view>
+        <view class="stat-label">待审核</view>
+        <view class="stat-badge" wx:if="{{stats.pendingCount > 0}}">{{stats.pendingCount}}</view>
+      </view>
+      <view class="stat-item">
+        <view class="stat-value">{{stats.todayCount}}</view>
+        <view class="stat-label">今日预约</view>
+      </view>
+    </view>
+    <view class="stats-row">
+      <view class="stat-item">
+        <view class="stat-value">{{stats.approvedCount}}</view>
+        <view class="stat-label">已通过</view>
+      </view>
+      <view class="stat-item">
+        <view class="stat-value">{{stats.totalCount}}</view>
+        <view class="stat-label">总预约</view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 功能入口 -->
+  <view class="menu-section">
+    <view class="menu-header">常用功能</view>
+    
+    <view class="menu-item" bindtap="goToPendingBookings">
+      <view class="menu-icon pending">📋</view>
+      <view class="menu-content">
+        <view class="menu-title">待审核预约</view>
+        <view class="menu-desc" wx:if="{{stats.pendingCount > 0}}">有 {{stats.pendingCount}} 个预约待审核</view>
+        <view class="menu-desc" wx:else>暂无待审核预约</view>
+      </view>
+      <view class="menu-arrow">›</view>
+    </view>
+    
+    <view class="menu-item" bindtap="goToBookingCalendar">
+      <view class="menu-icon calendar">📅</view>
+      <view class="menu-content">
+        <view class="menu-title">预约日历</view>
+        <view class="menu-desc">查看日历形式的预约安排</view>
+      </view>
+      <view class="menu-arrow">›</view>
+    </view>
+    
+    <view class="menu-item" bindtap="goToResourceManage">
+      <view class="menu-icon resource">🏠</view>
+      <view class="menu-content">
+        <view class="menu-title">资源管理</view>
+        <view class="menu-desc">管理场地内的可预约资源</view>
+      </view>
+      <view class="menu-arrow">›</view>
+    </view>
+    
+    <view class="menu-item" bindtap="goToVenueSettings">
+      <view class="menu-icon settings">⚙️</view>
+      <view class="menu-content">
+        <view class="menu-title">场地设置</view>
+        <view class="menu-desc">设置场地信息和营业时间</view>
+      </view>
+      <view class="menu-arrow">›</view>
+    </view>
+    
+    <view class="menu-item" bindtap="goToStats">
+      <view class="menu-icon chart">📊</view>
+      <view class="menu-content">
+        <view class="menu-title">数据统计</view>
+        <view class="menu-desc">查看预约数据和趋势分析</view>
+      </view>
+      <view class="menu-arrow">›</view>
+    </view>
+  </view>
+
+  <!-- 最近预约 -->
+  <view class="recent-section">
+    <view class="section-header">
+      <view class="section-title">最近预约</view>
+      <view class="section-more" bindtap="goToPendingBookings">查看全部 ›</view>
+    </view>
+    
+    <view class="booking-list" wx:if="{{recentBookings.length > 0}}">
+      <view class="booking-item" wx:for="{{recentBookings}}" wx:key="id" bindtap="goToBookingDetail" data-id="{{item.id}}">
+        <view class="booking-info">
+          <view class="booking-name">{{item.resource_name}}</view>
+          <view class="booking-time">{{item.booking_date}} {{item.start_time}}-{{item.end_time}}</view>
+          <view class="booking-contact">{{item.contact_name}} {{item.contact_phone}}</view>
+        </view>
+        <view class="status-tag status-{{item.status}}">{{item.statusText}}</view>
+      </view>
+    </view>
+    
+    <view class="empty-state" wx:else>
+      <text>暂无预约记录</text>
+    </view>
+  </view>
+</view>

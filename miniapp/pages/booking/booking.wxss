@@ -1,0 +1,243 @@
+/* pages/booking/booking.wxss */
+
+/* 资源信息卡片 */
+.resource-info-card {
+  background-color: #ffffff;
+  border-radius: 16rpx;
+  padding: 24rpx;
+  margin-bottom: 20rpx;
+}
+
+.resource-basic {
+  display: flex;
+}
+
+.resource-img {
+  width: 160rpx;
+  height: 120rpx;
+  border-radius: 12rpx;
+  margin-right: 20rpx;
+}
+
+.resource-detail {
+  flex: 1;
+}
+
+.resource-name {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #333333;
+  margin-bottom: 12rpx;
+}
+
+.resource-meta {
+  display: flex;
+}
+
+.meta-item {
+  font-size: 26rpx;
+  color: #666666;
+  margin-right: 24rpx;
+}
+
+/* 区域卡片 */
+.section-card {
+  background-color: #ffffff;
+  border-radius: 16rpx;
+  padding: 24rpx;
+  margin-bottom: 20rpx;
+}
+
+.section-title {
+  font-size: 30rpx;
+  font-weight: bold;
+  color: #333333;
+  margin-bottom: 20rpx;
+}
+
+/* 日期选择 */
+.date-scroll {
+  width: 100%;
+  white-space: nowrap;
+}
+
+.date-list {
+  display: flex;
+}
+
+.date-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 16rpx 24rpx;
+  margin-right: 16rpx;
+  border-radius: 12rpx;
+  background-color: #f5f5f5;
+  min-width: 100rpx;
+}
+
+.date-item:last-child {
+  margin-right: 0;
+}
+
+.date-item.active {
+  background-color: #1989fa;
+}
+
+.date-weekday {
+  font-size: 24rpx;
+  color: #666666;
+  margin-bottom: 8rpx;
+}
+
+.date-item.active .date-weekday {
+  color: #ffffff;
+}
+
+.date-day {
+  font-size: 36rpx;
+  font-weight: bold;
+  color: #333333;
+  margin-bottom: 4rpx;
+}
+
+.date-item.active .date-day {
+  color: #ffffff;
+}
+
+.date-month {
+  font-size: 22rpx;
+  color: #999999;
+}
+
+.date-item.active .date-month {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+/* 时段选择 */
+.time-slots {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.time-slot {
+  width: calc(33.33% - 16rpx);
+  margin-right: 24rpx;
+  margin-bottom: 20rpx;
+  padding: 20rpx 16rpx;
+  background-color: #f5f5f5;
+  border-radius: 8rpx;
+  text-align: center;
+}
+
+.time-slot:nth-child(3n) {
+  margin-right: 0;
+}
+
+.time-slot.disabled {
+  background-color: #f5f5f5;
+  opacity: 0.5;
+}
+
+.time-slot.active {
+  background-color: #1989fa;
+}
+
+.slot-time {
+  font-size: 26rpx;
+  color: #333333;
+}
+
+.time-slot.active .slot-time {
+  color: #ffffff;
+}
+
+.empty-slots {
+  text-align: center;
+  padding: 40rpx 0;
+  color: #999999;
+  font-size: 28rpx;
+}
+
+/* 表单 */
+.form-item {
+  margin-bottom: 24rpx;
+}
+
+.form-item:last-child {
+  margin-bottom: 0;
+}
+
+.form-label {
+  font-size: 28rpx;
+  color: #333333;
+  margin-bottom: 12rpx;
+  display: block;
+}
+
+.required {
+  color: #ee0a24;
+}
+
+.form-input {
+  width: 100%;
+  height: 88rpx;
+  padding: 0 24rpx;
+  background-color: #f5f5f5;
+  border-radius: 8rpx;
+  font-size: 28rpx;
+  box-sizing: border-box;
+}
+
+.form-textarea {
+  width: 100%;
+  height: 200rpx;
+  padding: 24rpx;
+  background-color: #f5f5f5;
+  border-radius: 8rpx;
+  font-size: 28rpx;
+  box-sizing: border-box;
+}
+
+/* 底部操作区 */
+.bottom-action {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 20rpx;
+  background-color: #ffffff;
+  box-shadow: 0 -4rpx 12rpx rgba(0, 0, 0, 0.05);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.price-info {
+  display: flex;
+  align-items: center;
+}
+
+.price-label {
+  font-size: 26rpx;
+  color: #666666;
+}
+
+.price-value {
+  font-size: 36rpx;
+  font-weight: bold;
+  color: #ee0a24;
+}
+
+.submit-btn {
+  background-color: #1989fa;
+  color: #ffffff;
+  padding: 20rpx 60rpx;
+  border-radius: 8rpx;
+  font-size: 30rpx;
+  font-weight: bold;
+}
+
+.submit-btn.disabled {
+  background-color: #c9c9c9;
+}

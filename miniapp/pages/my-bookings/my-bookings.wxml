@@ -1,0 +1,53 @@
+<!--pages/my-bookings/my-bookings.wxml-->
+<view class="container">
+  <!-- 状态标签 -->
+  <scroll-view class="tabs-scroll" scroll-x>
+    <view class="tabs">
+      <view class="tab-item {{currentTab === index ? 'active' : ''}}" 
+            wx:for="{{tabs}}" wx:key="value" 
+            bindtap="switchTab" data-index="{{index}}" data-value="{{item.value}}">
+        {{item.label}}
+      </view>
+    </view>
+  </scroll-view>
+
+  <!-- 预约列表 -->
+  <view class="booking-list" wx:if="{{bookingList.length > 0}}">
+    <view class="booking-card" wx:for="{{bookingList}}" wx:key="id" bindtap="goToBookingDetail" data-id="{{item.id}}">
+      <view class="booking-header">
+        <view class="resource-name">{{item.resource_name}}</view>
+        <view class="status-tag status-{{item.status}}">
+          {{item.statusText}}
+        </view>
+      </view>
+      <view class="booking-info">
+        <view class="info-item">
+          <text class="info-label">预约时间</text>
+          <text class="info-value">{{item.booking_date}} {{item.start_time}}-{{item.end_time}}</text>
+        </view>
+        <view class="info-item" wx:if="{{item.contact_name}}">
+          <text class="info-label">联系人</text>
+          <text class="info-value">{{item.contact_name}} {{item.contact_phone}}</text>
+        </view>
+      </view>
+      <view class="booking-actions" wx:if="{{item.status === 'pending' || item.status === 'approved'}}">
+        <view class="action-btn cancel" wx:if="{{item.status === 'pending' || item.status === 'approved'}}" 
+              catchtap="cancelBooking" data-id="{{item.id}}" data-status="{{item.status}}">
+          取消预约
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 空状态 -->
+  <view class="empty-state" wx:if="{{!loading && bookingList.length === 0}}">
+    <image src="/assets/images/empty-booking.png" class="empty-icon" mode="aspectFit" />
+    <text class="empty-text">暂无预约记录</text>
+    <view class="empty-action" bindtap="goToHome">去预约</view>
+  </view>
+
+  <!-- 加载中 -->
+  <view class="loading-container" wx:if="{{loading}}">
+    <view class="loading-text">加载中...</view>
+  </view>
+</view>

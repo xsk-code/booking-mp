@@ -1,0 +1,181 @@
+/* pages/venue-detail/venue-detail.wxss */
+
+/* 场地详情 */
+.venue-detail {
+  margin-bottom: 20rpx;
+}
+
+.venue-header {
+  position: relative;
+  height: 400rpx;
+  overflow: hidden;
+}
+
+.venue-cover {
+  width: 100%;
+  height: 100%;
+}
+
+.venue-info-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 32rpx 24rpx;
+  background: linear-gradient(transparent, rgba(0, 0, 0, 0.7));
+}
+
+.venue-name {
+  font-size: 36rpx;
+  font-weight: bold;
+  color: #ffffff;
+  margin-bottom: 12rpx;
+}
+
+.venue-address {
+  display: flex;
+  align-items: center;
+  font-size: 26rpx;
+  color: #ffffff;
+  opacity: 0.9;
+}
+
+.venue-address .icon {
+  margin-right: 8rpx;
+}
+
+.venue-details {
+  background-color: #ffffff;
+  padding: 24rpx;
+}
+
+.detail-item {
+  display: flex;
+  margin-bottom: 20rpx;
+}
+
+.detail-item:last-child {
+  margin-bottom: 0;
+}
+
+.detail-label {
+  width: 160rpx;
+  font-size: 28rpx;
+  color: #999999;
+  flex-shrink: 0;
+}
+
+.detail-value {
+  flex: 1;
+  font-size: 28rpx;
+  color: #333333;
+}
+
+.detail-value.phone {
+  color: #1989fa;
+  text-decoration: underline;
+}
+
+/* 资源列表 */
+.resources-section {
+  background-color: #ffffff;
+  border-radius: 16rpx;
+  overflow: hidden;
+}
+
+.section-title {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #333333;
+  padding: 24rpx;
+  border-bottom: 2rpx solid #f0f0f0;
+}
+
+.resource-list {
+  padding: 0 24rpx;
+}
+
+.resource-card {
+  display: flex;
+  align-items: center;
+  padding: 24rpx 0;
+  border-bottom: 2rpx solid #f0f0f0;
+}
+
+.resource-card:last-child {
+  border-bottom: none;
+}
+
+.resource-image {
+  width: 160rpx;
+  height: 120rpx;
+  border-radius: 12rpx;
+  overflow: hidden;
+  margin-right: 20rpx;
+  flex-shrink: 0;
+}
+
+.resource-img {
+  width: 100%;
+  height: 100%;
+}
+
+.resource-info {
+  flex: 1;
+}
+
+.resource-name {
+  font-size: 30rpx;
+  font-weight: bold;
+  color: #333333;
+  margin-bottom: 12rpx;
+}
+
+.resource-type {
+  margin-bottom: 8rpx;
+}
+
+.type-tag {
+  display: inline-block;
+  padding: 4rpx 12rpx;
+  background-color: #e6f7ff;
+  color: #1890ff;
+  font-size: 22rpx;
+  border-radius: 4rpx;
+}
+
+.resource-capacity,
+.resource-price {
+  font-size: 26rpx;
+  color: #999999;
+  margin-top: 8rpx;
+}
+
+.resource-arrow {
+  font-size: 40rpx;
+  color: #cccccc;
+  margin-left: 16rpx;
+  flex-shrink: 0;
+}
+
+/* 空状态 */
+.empty-state {
+  padding: 60rpx 0;
+  text-align: center;
+}
+
+.empty-text {
+  font-size: 28rpx;
+  color: #999999;
+}
+
+/* 加载中 */
+.loading-container {
+  padding: 100rpx 0;
+  text-align: center;
+}
+
+.loading-text {
+  font-size: 28rpx;
+  color: #999999;
+}

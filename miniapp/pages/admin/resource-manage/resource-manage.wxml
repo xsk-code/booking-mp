@@ -1,0 +1,25 @@
+<!--pages/admin/resource-manage/resource-manage.wxml-->
+<view class="container">
+  <view class="resource-list" wx:if="{{resourceList.length > 0}}">
+    <view class="resource-item" wx:for="{{resourceList}}" wx:key="id">
+      <view class="resource-info">
+        <view class="resource-name">{{item.name}}</view>
+        <view class="resource-meta">
+          <text class="meta-item">{{item.type === 'room' ? '包间' : item.type === 'table' ? '桌位' : '设备'}}</text>
+          <text class="meta-item" wx:if="{{item.capacity}}">容纳{{item.capacity}}人</text>
+        </view>
+      </view>
+      <view class="resource-status">
+        <text class="status-text {{item.status === 'active' ? 'active' : 'disabled'}}">{{item.status === 'active' ? '正常' : '停用'}}</text>
+      </view>
+    </view>
+  </view>
+  
+  <view class="empty-state" wx:else>
+    <text>暂无资源，点击下方按钮添加</text>
+  </view>
+  
+  <view class="add-btn">
+    <text>+ 添加资源</text>
+  </view>
+</view>

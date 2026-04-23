@@ -1,0 +1,84 @@
+<!--pages/booking/booking.wxml-->
+<view class="container">
+  <!-- 资源信息 -->
+  <view class="resource-info-card" wx:if="{{resource}}">
+    <view class="resource-basic">
+      <image src="{{resource.cover_image_url || '/assets/images/default-resource.png'}}" class="resource-img" mode="aspectFill" />
+      <view class="resource-detail">
+        <view class="resource-name">{{resource.name}}</view>
+        <view class="resource-meta">
+          <text class="meta-item" wx:if="{{resource.capacity}}">容纳{{resource.capacity}}人</text>
+          <text class="meta-item" wx:if="{{resource.price}}">¥{{resource.price}}/小时</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 日期选择 -->
+  <view class="section-card">
+    <view class="section-title">选择日期</view>
+    <scroll-view class="date-scroll" scroll-x>
+      <view class="date-list">
+        <view class="date-item {{selectedDate === item.date ? 'active' : ''}}" 
+              wx:for="{{dateList}}" wx:key="date" 
+              bindtap="selectDate" data-date="{{item.date}}">
+          <view class="date-weekday">{{item.isToday ? '今天' : item.weekday}}</view>
+          <view class="date-day">{{item.day}}</view>
+          <view class="date-month">{{item.month}}月</view>
+        </view>
+      </view>
+    </scroll-view>
+  </view>
+
+  <!-- 时段选择 -->
+  <view class="section-card">
+    <view class="section-title">选择时段</view>
+    <view class="time-slots" wx:if="{{timeSlots.length > 0}}">
+      <view class="time-slot {{!slot.is_available ? 'disabled' : ''}} {{selectedSlot === index ? 'active' : ''}}" 
+            wx:for="{{timeSlots}}" wx:key="index" 
+            bindtap="selectTimeSlot" data-index="{{index}}" data-slot="{{item}}"
+            wx:if="{{slot.is_available}}">
+        <view class="slot-time">{{slot.start_time}} - {{slot.end_time}}</view>
+      </view>
+    </view>
+    <view class="empty-slots" wx:if="{{timeSlots.length === 0}}">
+      <text>该日期暂无可用时段</text>
+    </view>
+  </view>
+
+  <!-- 预约表单 -->
+  <view class="section-card">
+    <view class="section-title">预约信息</view>
+    
+    <view class="form-item">
+      <view class="form-label">联系人姓名 <text class="required">*</text></view>
+      <input class="form-input" type="text" placeholder="请输入联系人姓名" value="{{formData.contact_name}}" bindinput="onInputChange" data-field="contact_name" />
+    </view>
+
+    <view class="form-item">
+      <view class="form-label">联系电话 <text class="required">*</text></view>
+      <input class="form-input" type="number" placeholder="请输入联系电话" value="{{formData.contact_phone}}" bindinput="onInputChange" data-field="contact_phone" />
+    </view>
+
+    <view class="form-item">
+      <view class="form-label">预约人数</view>
+      <input class="form-input" type="number" placeholder="请输入预约人数" value="{{formData.guest_count}}" bindinput="onInputChange" data-field="guest_count" />
+    </view>
+
+    <view class="form-item">
+      <view class="form-label">备注</view>
+      <textarea class="form-textarea" placeholder="请输入备注信息（可选）" value="{{formData.remark}}" bindinput="onInputChange" data-field="remark"></textarea>
+    </view>
+  </view>
+
+  <!-- 底部提交按钮 -->
+  <view class="bottom-action">
+    <view class="price-info" wx:if="{{resource && resource.price}}">
+      <text class="price-label">预估费用：</text>
+      <text class="price-value">¥{{estimatedPrice}}</text>
+    </view>
+    <view class="submit-btn {{canSubmit ? '' : 'disabled'}}" bindtap="submitBooking">
+      提交预约
+    </view>
+  </view>
+</view>

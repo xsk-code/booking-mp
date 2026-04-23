@@ -1,0 +1,28 @@
+{
+  "name": "booking-miniapp",
+  "version": "1.0.0",
+  "description": "预约小程序项目",
+  "main": "index.js",
+  "scripts": {
+    "dev": "vercel dev",
+    "deploy": "vercel --prod"
+  },
+  "keywords": [
+    "miniapp",
+    "wechat",
+    "booking",
+    "vercel",
+    "supabase"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "@supabase/supabase-js": "^2.0.0",
+    "jsonwebtoken": "^9.0.0",
+    "axios": "^1.0.0"
+  },
+  "devDependencies": {
+    "@types/jsonwebtoken": "^9.0.0",
+    "@vercel/node": "^2.0.0"
+  }
+}
