@@ -24,11 +24,9 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       });
     }
 
-    // 1. 调用微信 code2Session 获取 openid
     const session = await code2Session(code);
     const { openid, unionid } = session;
 
-    // 2. 查找或创建用户
     const { data: existingUser, error: findError } = await supabaseAdmin
       .from('users')
       .select('*')
@@ -39,13 +37,11 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     let isNewUser = false;
 
     if (findError || !existingUser) {
-      // 创建新用户
       const { data: newUser, error: createError } = await supabaseAdmin
         .from('users')
         .insert({
           openid,
           union_id: unionid,
-          role: 'user',
           status: 'active'
         })
         .select()
@@ -61,19 +57,16 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       user = existingUser;
     }
 
-    // 3. 签发 JWT token
     const token = sign(
       {
         sub: user.id,
-        role: user.role,
         openid: user.openid,
         iat: Math.floor(Date.now() / 1000),
-        exp: Math.floor(Date.now() / 1000) + 60 * 60 * 24 * 7 // 7天过期
+        exp: Math.floor(Date.now() / 1000) + 60 * 60 * 24 * 7
       },
       JWT_SECRET
     );
 
-    // 4. 返回结果
     return res.status(200).json({
       success: true,
       token,
@@ -81,8 +74,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
         id: user.id,
         nickname: user.nickname,
         avatar_url: user.avatar_url,
-        phone: user.phone,
-        role: user.role
+        phone: user.phone
       },
       is_new_user: isNewUser
     });

@@ -1,12 +1,10 @@
 <!--pages/profile/profile.wxml-->
 <view class="container">
-  <!-- 用户信息头部 -->
   <view class="profile-header">
     <view class="user-info" wx:if="{{isLoggedIn && userInfo}}">
-      <image class="avatar" src="{{userInfo.avatarUrl || '/assets/images/default-avatar.png'}}" mode="aspectFill" />
+      <image class="avatar" src="{{userInfo.avatar_url || '/assets/images/default-avatar.png'}}" mode="aspectFill" />
       <view class="user-detail">
-        <view class="nickname">{{userInfo.nickName || '微信用户'}}</view>
-        <view class="role-tag" wx:if="{{userInfo.role === 'admin'}}">管理员</view>
+        <view class="nickname">{{userInfo.nickname || '微信用户'}}</view>
       </view>
     </view>
     
@@ -16,7 +14,6 @@
     </view>
   </view>
 
-  <!-- 功能菜单 -->
   <view class="menu-section">
     <view class="menu-item" bindtap="goToMyBookings">
       <text class="menu-icon">📋</text>
@@ -24,9 +21,9 @@
       <text class="menu-arrow">›</text>
     </view>
     
-    <view class="menu-item" wx:if="{{userInfo && userInfo.role === 'admin'}}" bindtap="goToAdminDashboard">
-      <text class="menu-icon">⚙️</text>
-      <text class="menu-text">管理后台</text>
+    <view class="menu-item" bindtap="goToMyVenues">
+      <text class="menu-icon">🏢</text>
+      <text class="menu-text">我的场地</text>
       <text class="menu-arrow">›</text>
     </view>
     
@@ -43,12 +40,10 @@
     </view>
   </view>
 
-  <!-- 退出登录 -->
   <view class="logout-section" wx:if="{{isLoggedIn}}">
     <view class="logout-btn" bindtap="handleLogout">退出登录</view>
   </view>
 
-  <!-- 版本信息 -->
   <view class="version-info">
     <text>版本 v1.0.0</text>
   </view>

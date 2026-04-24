@@ -1,45 +1,69 @@
 <!--pages/index/index.wxml-->
 <view class="container">
-  <!-- 搜索栏 -->
-  <view class="search-bar">
-    <view class="search-input">
-      <text class="search-icon">🔍</text>
-      <input type="text" placeholder="搜索场地名称" value="{{searchKeyword}}" bindinput="onSearchInput" />
-    </view>
+  <view class="header-section">
+    <view class="header-title">🏢 预约小程序</view>
+    <view class="header-subtitle">扫描场地二维码或输入场地码进入</view>
   </view>
 
-  <!-- 场地列表 -->
-  <view class="venue-list" wx:if="{{venueList.length > 0}}">
-    <view class="venue-card" wx:for="{{venueList}}" wx:key="id" bindtap="goToVenueDetail" data-id="{{item.id}}">
-      <view class="venue-image">
-        <image src="{{item.cover_image_url || '/assets/images/default-venue.png'}}" mode="aspectFill" class="venue-img" />
-      </view>
-      <view class="venue-info">
-        <view class="venue-name">{{item.name}}</view>
-        <view class="venue-address">
-          <text class="icon">📍</text>
-          <text class="address-text">{{item.address || '暂无地址'}}</text>
+  <view class="search-section">
+    <view class="search-box">
+      <view class="search-input-wrapper">
+        <text class="search-icon">🔍</text>
+        <input 
+          type="text" 
+          placeholder="输入场地码（如：QT8A2F）" 
+          value="{{venueCode}}" 
+          bindinput="onVenueCodeInput"
+          placeholder-class="placeholder"
+          maxlength="16"
+        />
+        <view class="search-btn" bindtap="onSearch" wx:if="{{!searchLoading}}">
+          <text class="search-btn-text">搜索</text>
         </view>
-        <view class="venue-time">
-          <text class="icon">🕐</text>
-          <text class="time-text">{{item.business_start}} - {{item.business_end}}</text>
-        </view>
-        <view class="venue-contact" wx:if="{{item.contact_phone}}">
-          <text class="icon">📞</text>
-          <text class="phone-text">{{item.contact_phone}}</text>
+        <view class="search-btn loading" wx:if="{{searchLoading}}">
+          <text class="search-btn-text">搜索中...</text>
         </view>
       </view>
     </view>
+
+    <view class="scan-section">
+      <view class="scan-btn" bindtap="onScanCode">
+        <view class="scan-icon">📷</view>
+        <text class="scan-text">扫描场地二维码</text>
+      </view>
+    </view>
   </view>
 
-  <!-- 空状态 -->
-  <view class="empty-state" wx:if="{{!loading && venueList.length === 0}}">
-    <image src="/assets/images/empty-venue.png" class="empty-icon" mode="aspectFit" />
-    <text class="empty-text">暂无可用场地</text>
+  <view class="recent-section" wx:if="{{hasRecentVenues}}">
+    <view class="section-header">
+      <text class="section-title">最近访问</text>
+      <text class="clear-btn" bindtap="clearRecentVenues">清除</text>
+    </view>
+    
+    <view class="recent-list">
+      <view 
+        class="recent-item" 
+        wx:for="{{recentVenues}}" 
+        wx:key="id"
+        bindtap="onRecentVenueTap"
+        data-id="{{item.id}}"
+      >
+        <view class="recent-icon">📍</view>
+        <view class="recent-info">
+          <view class="recent-name">{{item.name}}</view>
+          <view class="recent-meta">
+            <text class="recent-code">{{item.venue_code}}</text>
+            <text class="recent-address" wx:if="{{item.address}}">{{item.address}}</text>
+          </view>
+        </view>
+        <text class="arrow">›</text>
+      </view>
+    </view>
   </view>
 
-  <!-- 加载中 -->
-  <view class="loading-container" wx:if="{{loading}}">
-    <view class="loading-text">加载中...</view>
+  <view class="empty-section" wx:if="{{!hasRecentVenues}}">
+    <view class="empty-icon">🏠</view>
+    <view class="empty-text">暂无访问记录</view>
+    <view class="empty-hint">扫描场地二维码或输入场地码开始预约</view>
   </view>
 </view>
