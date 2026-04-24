@@ -1,15 +1,14 @@
 // api/_utils/auth.ts
 import { VercelRequest, VercelResponse } from '@vercel/node';
 import { verify } from 'jsonwebtoken';
+import { supabaseAdmin } from './supabase';
 
 const JWT_SECRET = process.env.JWT_SECRET || '';
 
 export interface AuthUser {
   userId: string;
-  role: 'user' | 'admin';
 }
 
-// 认证错误类
 export class AuthError extends Error {
   constructor(message: string) {
     super(message);
@@ -17,7 +16,6 @@ export class AuthError extends Error {
   }
 }
 
-// 认证中间件
 export function authenticate(req: VercelRequest): AuthUser {
   const token = req.headers.authorization?.replace('Bearer ', '');
   
@@ -28,26 +26,75 @@ export function authenticate(req: VercelRequest): AuthUser {
   try {
     const payload = verify(token, JWT_SECRET) as any;
     return {
-      userId: payload.sub,
-      role: payload.role || 'user'
+      userId: payload.sub
     };
   } catch (error) {
     throw new AuthError('token 无效或已过期');
   }
 }
 
-// 管理员权限检查
-export function requireAdmin(req: VercelRequest): AuthUser {
+export async function requireVenueOwner(req: VercelRequest, venueId: string): Promise<AuthUser> {
   const user = authenticate(req);
   
-  if (user.role !== 'admin') {
-    throw new AuthError('无管理员权限');
+  const { data: venue, error } = await supabaseAdmin
+    .from('venues')
+    .select('creator_id')
+    .eq('id', venueId)
+    .single();
+
+  if (error || !venue) {
+    throw new AuthError('场地不存在');
+  }
+
+  if (venue.creator_id !== user.userId) {
+    throw new AuthError('无权限：仅场地所有者可操作');
   }
   
   return user;
 }
 
-// 处理认证错误
+export async function requireResourceOwner(req: VercelRequest, resourceId: string): Promise<AuthUser> {
+  const user = authenticate(req);
+  
+  const { data: resource, error } = await supabaseAdmin
+    .from('resources')
+    .select('venue_id, venues!inner(creator_id)')
+    .eq('id', resourceId)
+    .single();
+
+  if (error || !resource) {
+    throw new AuthError('资源不存在');
+  }
+
+  const venues = resource.venues as any;
+  if (!venues || venues.creator_id !== user.userId) {
+    throw new AuthError('无权限：仅场地所有者可操作');
+  }
+  
+  return user;
+}
+
+export async function requireBookingOwner(req: VercelRequest, bookingId: string): Promise<AuthUser> {
+  const user = authenticate(req);
+  
+  const { data: booking, error } = await supabaseAdmin
+    .from('bookings')
+    .select('venue_id, venues!inner(creator_id)')
+    .eq('id', bookingId)
+    .single();
+
+  if (error || !booking) {
+    throw new AuthError('预约不存在');
+  }
+
+  const venues = booking.venues as any;
+  if (!venues || venues.creator_id !== user.userId) {
+    throw new AuthError('无权限：仅场地所有者可操作');
+  }
+  
+  return user;
+}
+
 export function handleAuthError(res: VercelResponse, error: Error) {
   if (error instanceof AuthError) {
     return res.status(401).json({

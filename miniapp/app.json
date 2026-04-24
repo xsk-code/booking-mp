@@ -8,12 +8,14 @@
     "pages/my-bookings/my-bookings",
     "pages/booking-detail/booking-detail",
     "pages/profile/profile",
-    "pages/admin/dashboard/dashboard",
-    "pages/admin/pending-bookings/pending-bookings",
-    "pages/admin/booking-calendar/booking-calendar",
-    "pages/admin/resource-manage/resource-manage",
-    "pages/admin/venue-settings/venue-settings",
-    "pages/admin/stats/stats"
+    "pages/my-venues/my-venues",
+    "pages/my-venues/venue-edit/venue-edit",
+    "pages/my-venues/venue-dashboard/venue-dashboard",
+    "pages/my-venues/pending-bookings/pending-bookings",
+    "pages/my-venues/booking-calendar/booking-calendar",
+    "pages/my-venues/resource-manage/resource-manage",
+    "pages/my-venues/time-slot-manage/time-slot-manage",
+    "pages/my-venues/stats/stats"
   ],
   "window": {
     "backgroundTextStyle": "light",

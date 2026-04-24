@@ -1,0 +1,59 @@
+<!--pages/my-venues/my-venues.wxml-->
+<view class="container">
+  <view class="create-section" bindtap="goToCreateVenue">
+    <view class="create-icon">+</view>
+    <view class="create-text">创建新场地</view>
+  </view>
+
+  <view class="venue-list-section" wx:if="{{!loading && hasVenues}}">
+    <view class="section-title">我的场地</view>
+    
+    <view class="venue-list">
+      <view 
+        class="venue-card" 
+        wx:for="{{venues}}" 
+        wx:key="id"
+        bindtap="goToVenueManage"
+        data-id="{{item.id}}"
+        data-name="{{item.name}}"
+      >
+        <view class="venue-header">
+          <view class="venue-name">{{item.name}}</view>
+          <view class="venue-code">{{item.venue_code}}</view>
+        </view>
+        
+        <view class="venue-info">
+          <view class="info-item" wx:if="{{item.address}}">
+            <text class="info-icon">📍</text>
+            <text class="info-text">{{item.address}}</text>
+          </view>
+          <view class="info-item">
+            <text class="info-icon">🕐</text>
+            <text class="info-text">{{item.business_start}} - {{item.business_end}}</text>
+          </view>
+          <view class="info-item">
+            <text class="info-icon">🏠</text>
+            <text class="info-text">{{item.resource_count || 0}} 个资源</text>
+          </view>
+        </view>
+        
+        <view class="venue-footer">
+          <text class="enter-text">进入管理 ›</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="empty-section" wx:if="{{!loading && !hasVenues}}">
+    <view class="empty-icon">🏢</view>
+    <view class="empty-title">还没有创建场地</view>
+    <view class="empty-hint">创建自己的场地，生成场地码分享给他人预约</view>
+    <view class="create-btn" bindtap="goToCreateVenue">
+      <text class="create-btn-text">立即创建</text>
+    </view>
+  </view>
+
+  <view class="loading-section" wx:if="{{loading}}">
+    <text class="loading-text">加载中...</text>
+  </view>
+</view>
